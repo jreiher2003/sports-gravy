@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block title %}Profile{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-2">
+            <div class="profileborder">
+                {% if current_user.profile.avatar %}
+                    <img class="profilepic" src="{{ current_user.profile.imgsrc }}" width="150" height="150"/>
+                {% else %}
+                    <img class="profilepic" src="{{ url_for('static', filename='img/user.jpg') }}" width="150"/>
+                {% endif %}
+                <div class="caption">
+                    <hr class="profileme">
+                    <p class="p__status"><b>Username:</b> {{ current_user.username }}</p>
+                    <p class="p__status"><b>Email:</b><small> {{ current_user.email }}</small></p>
+                    <p class="p__status"><b>Bets Created:</b><small> {{ current_user.profile.bets_created }}</small></p>
+                    <p class="p__status"><b>Bets Taken:</b><small> {{ current_user.profile.bets_taken }}</small></p>
+                    <p class="p__status"><b>Wins:</b><small> {{ current_user.profile.wins }}</small></p>
+                    <p class="p__status"><b>Losses:</b><small> {{ current_user.profile.losses }}</small></p>
+                    <p class="p__status"><b>Pushes:</b><small> {{ current_user.profile.pushes }}</small></p>
+                    <p class="p__status"><b>Pending Bets:</b><small> {{ num_pending }}</small></p>
+                    <p class="p__status"><b>Graded Bets:</b><small> {{ num_graded }}</small></p>
+                    <p class="p__status"><b>Balance:</b><small> {{ current_user.bitcoin_wallet.available_btc }} BTC</small></p>
+                    <p class="p__status"><b>Account Confirmed: </b>
+                        {% if current_user.confirmed == False %}
+                            <small class="label label-danger"> {{ current_user.confirmed }} </small>
+                        {% else %}
+                            <small class="label label-success"> {{ current_user.confirmed }} </small>
+                        {% endif %}
+                    <hr class="profileme">
+                    <div class="profile_class_button">
+                        {% if current_user.confirmed == False %}
+                            {% include "profile/confirm_email_modal.html" %}
+                        {% endif %}
+                        {% include "profile/profile_change_password_modal.html" %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            {% include "profile/update_profile_form.html" %}
+        </div>
+        <div class="col-md-4">
+            {% include "profile/qrcodes.html" %}
+            {% include "profile/btc_form.html" %}
+        </div>    
+    </div><!-- end row -->
+    <br><br>
+    <div class="row">
+        <div class="col-md-4">
+            {% include "profile/according.html" %}
+        </div>
+        <div class="col-md-6"></div>
+    </div>
+</div><!-- end container -->
+
+
+{% endblock %}

@@ -1,0 +1,124 @@
+{% extends "base.html" %}
+{% block title %}NFL Standings{% endblock %}
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <!-- AFC EAST -->
+      <table class="table table-condensed table-responsive">
+        <thead> 
+          <tr>
+            <th class="team"><b>AFC East</b></th> 
+            {% include "nfl_standings/table_head_standing.html" %}
+            {% for x in standing %}
+              {% if x.Conference == "AFC" and x.Division == "East" %}
+          <tr>
+            {% include "nfl_standings/table_standings_td.html" %}
+          </tr>
+              {% endif %}
+            {% endfor %}
+      </table>
+      <!-- AFC NORTH -->
+      <table class="table table-condensed table-responsive">
+        <thead> 
+          <tr>
+            <th><b>AFC North</b></th> 
+            {% include "nfl_standings/table_head_standing.html" %}
+            {% for x in standing %}
+              {% if x.Conference == "AFC" and x.Division == "North" %}
+            <tr>
+              {% include "nfl_standings/table_standings_td.html" %}
+            </tr>
+              {% endif %}
+            {% endfor %}
+      </table>
+      <!-- AFC SOUTH -->
+      <table class="table table-condensed table-responsive">
+        <thead> 
+          <tr>
+            <th><b>AFC South</b></th> 
+            {% include "nfl_standings/table_head_standing.html" %}
+            {% for x in standing %}
+              {% if x.Conference == "AFC" and x.Division == "South" %}
+            <tr>
+              {% include "nfl_standings/table_standings_td.html" %}
+            </tr>
+              {% endif %}
+            {% endfor %}
+      </table>
+      <!-- AFC WEST -->
+      <table class="table table-condensed table-responsive">
+        <thead> 
+         
+          <tr>
+            <th><b>AFC West</b></th> 
+            {% include "nfl_standings/table_head_standing.html" %}
+            {% for x in standing %}
+              {% if x.Conference == "AFC" and x.Division == "West" %}
+            <tr>
+              {% include "nfl_standings/table_standings_td.html" %}
+            </tr>
+              {% endif %}
+            {% endfor %}
+      </table>
+      <!-- NFC EAST -->
+      <table class="table table-condensed table-responsive">
+        <thead> 
+          <tr>
+            <th><b>NFL East</b></th> 
+            {% include "nfl_standings/table_head_standing.html" %}
+            {% for x in standing %}
+              {% if x.Conference == "NFC" and x.Division == "East" %}
+            <tr>
+              {% include "nfl_standings/table_standings_td.html" %}
+            </tr>
+              {% endif %}
+            {% endfor %}
+      </table>
+      <!-- NFC NORTH -->
+      <table class="table table-condensed table-responsive">
+        <thead> 
+          <tr>
+            <th><b>NFC North</b></th> 
+            {% include "nfl_standings/table_head_standing.html" %}
+            {% for x in standing %}
+              {% if x.Conference == "NFC" and x.Division == "North" %}
+            <tr>
+              {% include "nfl_standings/table_standings_td.html" %}
+            </tr>
+              {% endif %}
+            {% endfor %}
+      </table>
+      <!-- NFL SOUTH -->
+      <table class="table table-condensed table-responsive">
+        <thead> 
+          <tr>
+            <th><b>NFC South</b></th> 
+            {% include "nfl_standings/table_head_standing.html" %}
+            {% for x in standing %}
+              {% if x.Conference == "NFC" and x.Division == "South" %}
+            <tr>
+              {% include "nfl_standings/table_standings_td.html" %}
+            </tr>
+              {% endif %}
+            {% endfor %}
+      </table>
+      <table class="table table-condensed table-responsive">
+        <thead> 
+          <tr>
+            <th><b>NFC West</b></th> 
+            {% include "nfl_standings/table_head_standing.html" %}
+            {% for x in standing %}
+              {% if x.Conference == "NFC" and x.Division == "West" %}
+            <tr>
+              {% include "nfl_standings/table_standings_td.html" %}
+            </tr>
+              {% endif %}
+            {% endfor %}
+      </table>
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,49 @@
+img.profilepic {
+    border-radius:15%;
+    border: 3px solid #2780e3;
+    text-align: center;
+    display: block;
+    margin: 0 auto;
+}
+div.profileborder {
+    border: .8px solid #ddd;
+    padding: 10px;
+}
+hr.profileme {
+    border-top: 2px solid #2780e3;
+}
+p.p__status {
+    font-size: .8em;
+    margin-bottom: .4em;
+}
+div.no__widthdrawl {
+    min-height: 200px;
+}
+div.nomoney i {
+    font-size: 7em;
+    color: #bd0c0c;
+    text-shadow: 5px 2px #ddd;
+    margin-bottom: 20px;
+}
+div.errors  {
+    width: 100%;
+    margin: 10px 0 10px 0;
+    background-color: #ff0039;
+    color: #fff;
+    text-align: center;
+    
+}
+.profile_center {
+    margin-bottom: 5px;
+    min-width: 150px;
+}
+div.profile_class_button {
+    text-align: center;
+}
+/* ---- tool-tip ---- */
+.createBCB + .tooltip > .tooltip-inner {
+    background-color: #f00;
+}
+.createBCB + .tooltip > .tooltip-arrow { 
+    border-bottom-color:#f00; 
+}

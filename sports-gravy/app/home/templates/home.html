@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block title %}{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+
+       home<br><br>
+       {% if current_user.has_role("admin") %}
+          {{ current_user.roles }}<br>{{ current_user.has_role("admin") }}
+       {% else %}
+       no player-not logged in<br>
+       {% endif %}
+
+       {% for t in team %}
+          {{ t }}<br><br><br>
+       {% endfor %}
+       
+     
+        </div>
+    </div>
+</div>
+{
+  "Key":"ARI",
+  "TeamID":1,
+  "PlayerID":1,
+  "City":"Arizona",
+  "Name":"Cardinals",
+  "Conference":"NFC",
+  "Division":"West",
+  "FullName":"Arizona Cardinals",
+  "StadiumID":29,"ByeWeek":9,
+  "AverageDraftPosition":null,
+  "AverageDraftPositionPPR":114.10,
+  "HeadCoach":"Bruce Arians",
+  "OffensiveCoordinator":"Harold Goodwin",
+  "DefensiveCoordinator":"James Bettcher",
+  "SpecialTeamsCoach":"Amos Jones",
+  "OffensiveScheme":"2TE",
+  "DefensiveScheme":"3-4",
+  "UpcomingSalary":2700,
+  "UpcomingOpponent":"CAR",
+  "UpcomingOpponentRank":29,
+  "UpcomingOpponentPositionRank":29,
+  "UpcomingFanDuelSalary":4600,
+  "UpcomingDraftKingsSalary":2700,
+  "UpcomingYahooSalary":18,
+  "StadiumDetails":{
+    "StadiumID":29,
+    "Name":"University of Phoenix Stadium",
+    "City":"Glendale",
+    "State":"AZ",
+    "Country":"USA",
+    "Capacity":63400,
+    "PlayingSurface":"Dome",
+    "GeoLat":33.527558,
+    "GeoLong":-112.263036}
+  },
+
+{% endblock %}

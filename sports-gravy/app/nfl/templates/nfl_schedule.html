@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}NFL schedule{% endblock title %}
+{% block style %}
+
+{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <div class="ptable__board">
+                <table class="table table-border">
+                    <thead class="thead"> 
+                        <tr> 
+                            <th class="text-center">Date Week: 7</th>  
+                            <th class="text-center">Game Number</th> 
+                            <th class="text-center">Game</th>
+                            <th class="text-center">Spread</th>
+                            <th class="text-center">ML</th>
+                        </tr>
+                    </thead> 
+                    <tbody class="tbody">
+                     {% for d in data %}
+                        {#{% if d.Date|dateify > dt %}#}
+                        <tr>
+                            <td rowspan="2" class="text-center"><p class="reg_pboard">{{ d.Date }}</p><p class="reg_pboard">{{ d.Date }}</p></td>
+                            <td rowspan="2" class="text-center"><p class="reg_pboard">{{ d.GameKey }}</p></td>
+                            <td class="text-center"><p class="pboard">{{ d.AwayTeam }}</p></td>
+                            <td class="middlerow text-center"><p class="bottom_pboard">{{ d.PointSpread }}</p></td>
+                            <td class="text-center"><p class="pboard">{{ d.AwayTeamMoneyLine }}</p></td>
+                        </tr>
+                        <tr>
+                            <td class="middlerow text-center"><p class="bottom_pboard">{{ d.HomeTeam }}</p></td>
+                            <td class="middlerow text-center"><p class="bottom_pboard">{{ d.OverUnder }}</p></td>
+                            <td class="text-center"><p class="pboard">{{ d.HomeTeamMoneyLine }}</p></td>
+                        </tr>
+                         {#{% endif %}#}
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            
+        </div>
+    </div>
+</div>
+{% include "footer.html" %}
+{% endblock content %}

@@ -1,0 +1,97 @@
+<ul class="dropdown-menu">
+<div class="row">
+<div class="col-md-6">
+    <h2 class="text-center nav__league">AFC</h2>
+    <div class="row">
+      <div class="col-md-6">
+        <h3 class="text-center nav__division">East</h3>
+         {% for team in all_teams %}
+              {% if team.Conference == "AFC" %}
+                {% if team.Division == "East" %}
+                  <li class="nav__team"><a href="{{ url_for('nfl.nfl_team_home', sid=1, key=team.Key, team=team.FullName|urlify) }}">{{ team.FullName }}</a></li>
+                  <li class="divider"></li>
+                {% endif %}
+              {% endif %}
+          {% endfor %}
+          <h3 class="text-center nav__division">South</h3>
+         {% for team in all_teams %}
+              {% if team.Conference == "AFC" %}
+                {% if team.Division == "South" %}
+                  <li class="nav__team"><a href="{{ url_for('nfl.nfl_team_home', sid=1, key=team.Key, team=team.FullName|urlify) }}">{{ team.FullName }}</a></li>
+                  <li class="divider"></li>
+                {% endif %}
+              {% endif %}
+          {% endfor %}
+      </div><!-- end col-md-6 inner -->
+      <div class="col-md-6">
+        <h3 class="text-center nav__division">North</h3>
+         {% for team in all_teams %}
+              {% if team.Conference == "AFC" %}
+                {% if team.Division == "North" %}
+                  <li class="nav__team"><a href="{{ url_for('nfl.nfl_team_home', sid=1, key=team.Key, team=team.FullName|urlify) }}">{{ team.FullName }}</a></li>
+                  <li class="divider"></li>
+                {% endif %}
+              {% endif %}
+          {% endfor %}
+          <h3 class="text-center nav__division">West</h3>
+         {% for team in all_teams %}
+              {% if team.Conference == "AFC" %}
+                {% if team.Division == "West" %}
+                  <li class="nav__team"><a href="{{ url_for('nfl.nfl_team_home', sid=1, key=team.Key, team=team.FullName|urlify) }}">{{ team.FullName }}</a></li>
+                  <li class="divider"></li>
+                {% endif %}
+              {% endif %}
+          {% endfor %}
+      </div><!-- end col-md-6 inner -->
+    </div>
+</div><!-- end col-md-6 outter -->
+       
+
+<div class="col-md-6">
+    <h2 class="text-center nav__league">NFC</h2>
+    <div class="row">
+      <div class="col-md-6">
+        <h3 class="text-center nav__division">East</h3>
+         {% for team in all_teams %}
+              {% if team.Conference == "NFC" %}
+                {% if team.Division == "East" %}
+                  <li class="nav__team"><a href="{{ url_for('nfl.nfl_team_home', sid=1, key=team.Key, team=team.FullName|urlify) }}">{{ team.FullName }}</a></li>
+                  <li class="divider"></li>
+                {% endif %}
+              {% endif %}
+          {% endfor %}
+          <h3 class="text-center nav__division">South</h3>
+         {% for team in all_teams %}
+              {% if team.Conference == "NFC" %}
+                {% if team.Division == "South" %}
+                  <li class="nav__team"><a href="{{ url_for('nfl.nfl_team_home', sid=1, key=team.Key, team=team.FullName|urlify) }}">{{ team.FullName }}</a></li>
+                  <li class="divider"></li>
+                {% endif %}
+              {% endif %}
+          {% endfor %}
+      </div><!-- end col-md-6 inner -->
+      <div class="col-md-6">
+        <h3 class="text-center nav__division">North</h3>
+         {% for team in all_teams %}
+              {% if team.Conference == "NFC" %}
+                {% if team.Division == "North" %}
+                  <li class="nav__team"><a href="{{ url_for('nfl.nfl_team_home', sid=1, key=team.Key, team=team.FullName|urlify) }}">{{ team.FullName }}</a></li>
+                  <li class="divider"></li>
+                {% endif %}
+              {% endif %}
+          {% endfor %}
+          <h3 class="text-center nav__division">West</h3>
+         {% for team in all_teams %}
+              {% if team.Conference == "NFC" %}
+                {% if team.Division == "West" %}
+                  <li class="nav__team"><a href="{{ url_for('nfl.nfl_team_home', sid=1, key=team.Key, team=team.FullName|urlify) }}">{{ team.FullName }}</a></li>
+                  <li class="divider"></li>
+                {% endif %}
+              {% endif %}
+          {% endfor %}
+      </div><!-- end col-md-6 inner -->
+    </div>
+</div><!-- end col-md-6 outter -->
+
+</div><!-- end most outter row -->
+</ul>

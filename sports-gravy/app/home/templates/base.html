@@ -1,0 +1,74 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}{% endblock %}</title>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootswatch/cosmo/bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/nav.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/footer.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/stats_table_styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/nfl_board.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/moble_under_768.css') }}">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>{% block style %}{% endblock %}</style>
+  </head>
+  <body>
+    {% include "nav.html" %}
+    {% include "flash_messages.html" %}
+    {% block content %}
+    {% endblock content %}
+
+    <script src="/static/js/jquery/dist/jquery.min.js"></script>
+    <script src="/static/js/bootstrap/bootstrap.js"></script>
+    <script src="/static/js/jquery-form-validator/form-validator/jquery.form-validator.min.js"></script>
+    <script src="/static/js/tablesorter/jquery.tablesorter.js"></script>
+    <script src="/static/js/tablesorter/pager/jquery.tablesorter.pager.js"></script>
+    <script src="/static/js/create_bet_tabs.js"></script>
+    <script src="/static/js/select_team.js"></script>
+    <script src="/static/js/nfl_team_stats_tabs.js"></script>
+    <script src="/static/js/nav_dropdown.js"></script>
+    <script src="/static/js/all_tablesortings.js"></script>
+    <script src="/static/js/jquery.qrcode.min.js"></script>
+    <script>
+    // prevents tabs in stats from jumping down
+    $('.nav-tabs li a').click( function(e) {
+    history.pushState( null, null, $(this).attr('href') );
+    });
+    </script>
+    {% if current_user.bitcoin_wallet %}
+    <script>
+    $('#qrcode').qrcode({
+        width: 300,
+        height: 300, 
+        text: "{{ current_user.bitcoin_wallet.address }}",
+    });
+    </script>
+    {% endif %}
+    <!-- create btc wallet js -->
+    <script>
+    $(document).on('click', '#createBCB:enabled', function(){
+        return false
+    });
+    </script>
+    <script>
+    $(document).ready(function(){
+        $("#createBCB").tooltip();
+    });
+    </script>
+<!-- - end btc wallet js - -->
+    <script>
+    $("[data-toggle=popover]").popover();
+    </script>
+  </body>
+</html>
