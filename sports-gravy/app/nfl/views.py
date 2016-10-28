@@ -27,14 +27,14 @@ def api_request(params):
     except Exception as e:
         print e
 
-all_teams = api_request("v3/nfl/scores/JSON/Teams/2016REG")
+all_nfl_teams = api_request("v3/nfl/scores/JSON/Teams/2016REG")
 
 @nfl_blueprint.route("/nfl/home/")
 @nfl_blueprint.route("/nfl/")
 def nfl_home():
     return render_template(
         "nfl_home.html", 
-        all_teams = all_teams,
+        all_teams = all_nfl_teams,
         )
 
 @nfl_blueprint.route("/nfl/standings/")
@@ -43,7 +43,7 @@ def nfl_standings():
     st = api_request("/v3/nfl/scores/JSON/Standings/2016REG")
     return render_template(
         "nfl_standings/nfl standings.html", 
-        all_teams = all_teams,
+        all_teams = all_nfl_teams,
         standing = st, 
         )
 
@@ -55,17 +55,18 @@ def nfl_schedule():
         print i
     return render_template(
         "nfl_schedule.html", 
-        all_teams = all_teams, 
+        all_teams = all_nfl_teams, 
         data = sch, 
         dt = dt,
         )
 
 @nfl_blueprint.route("/nfl/stats/<int:sid>/")
 def nfl_stats(sid): 
-    teamseason1 = NFLTeamSeason.query.filter_by(SeasonType=sid).all()
+
+    teamseason1 = api_request("/v3/nfl/stats/JSON/TeamSeasonStats/2016REG")
     return render_template(
         "nfl_stats.html", 
-        all_teams = all_nfl_teams(), 
+        all_teams = all_nfl_teams, 
         teamseason = teamseason1,
         )
 
@@ -87,7 +88,7 @@ def nfl_team_home(sid,key,team):
     team_def_rank = team_def_avg(tss.OpponentOffensiveYards,tss.Team, sid) 
     return render_template(
         "nfl_team/nfl_team_home.html",
-        all_teams = all_nfl_teams(),
+        all_teams = all_nfl_teams,
         team_rush_rank = team_rush_rank,
         team_pass_rank = team_pass_rank,
         opp_team_rush_rank = opp_team_rush_rank,
@@ -107,12 +108,12 @@ def nfl_team_home(sid,key,team):
 
 @nfl_blueprint.route("/nfl/team/schedule/<path:team>/")
 def nfl_team_schedule(team):
-    all_teams = all_nfl_teams()
+    all_teams = all_nfl_teams
     return "schedule"
 
 @nfl_blueprint.route("/nfl/team/stats/<path:team>/")
 def nfl_team_stats(team):
-    all_teams = all_nfl_teams()
+    all_teams = all_nfl_teams
     return "stats"
 
 
