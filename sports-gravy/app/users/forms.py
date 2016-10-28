@@ -1,4 +1,4 @@
-from flask_wtf import Form
+from flask_wtf import FlaskForm
 from wtforms.validators import InputRequired, Email, NumberRange, Length, ValidationError, EqualTo
 from wtforms import TextField, SubmitField, FloatField, PasswordField, BooleanField
 from wtforms.fields.html5 import EmailField
@@ -29,12 +29,7 @@ def password_validator(form, field):
     if not is_valid:
         raise ValidationError("You need 12 characters, at least one upper, lower, and one digit.")
 
-def positve_bitcoin(form, field):
-    if field.data < 0:
-        raise ValidationError("Only positive values please.")
-
-
-class LoginForm(Form):
+class LoginForm(FlaskForm):
     username = TextField("Username", [InputRequired()])
     password = PasswordField("Password", [InputRequired()])
     remember = BooleanField("Remember me")
@@ -42,42 +37,36 @@ class LoginForm(Form):
     # https://flask-wtf.readthedocs.io/en/stable/form.html#module-flask_wtf.file
     submit = SubmitField("Login")
 
-class RegisterForm(Form):
+class RegisterForm(FlaskForm):
     username = TextField("Username",  [InputRequired(), validate_username])
     email = EmailField("Email", [InputRequired(), Email()])
-    password = PasswordField("Password", [InputRequired(), Length(min=12, message="The min password length is 12 chars long."), password_validator])
+    password = PasswordField("Password", [InputRequired(), Length(min=6, message="The min password length is 6 chars long."), password_validator])
     password_confirm = PasswordField("Confirm", [InputRequired(), EqualTo("password", message="Your passwords don't match.")])
     submit = SubmitField("Register")
 
-class RecoverPasswordForm(Form):
+class RecoverPasswordForm(FlaskForm):
     email = EmailField("Email", [InputRequired(), Email()])
     submit = SubmitField("Reset Password")
 
-class SendEmailConfirmForm(Form):
+class SendEmailConfirmForm(FlaskForm):
     email = EmailField("Email", [InputRequired(), Email()])
     submit = SubmitField("Resend confirmation")
 
-class ChangePasswordForm(Form):
-    password = PasswordField("Password", [InputRequired(), Length(min=12, message="The min password length is 12 chars long.")])
-    new_password = PasswordField("Password", [InputRequired(), Length(min=12, message="The min password length is 12 chars long."), password_validator])
+class ChangePasswordForm(FlaskForm):
+    password = PasswordField("Password", [InputRequired(), Length(min=6, message="The min password length is 6 chars long.")])
+    new_password = PasswordField("Password", [InputRequired(), Length(min=6, message="The min password length is 6 chars long."), password_validator])
     new_password_confirm = PasswordField("Confirm", [InputRequired(), EqualTo("new_password", message="Your passwords don't match.")])
     submit = SubmitField("Change Password")
 
-class ChangePasswordTokenForm(Form):
-    password = PasswordField("Password", [InputRequired(), Length(min=12, message="The min password length is 12 chars long."), password_validator])
+class ChangePasswordTokenForm(FlaskForm):
+    password = PasswordField("Password", [InputRequired(), Length(min=6, message="The min password length is 6 chars long."), password_validator])
     password_confirm = PasswordField("Confirm", [InputRequired(), EqualTo("password", message="Your passwords don't match.")])
     submit = SubmitField("Change Password")
 
-class ProfileForm(Form):
+class ProfileForm(FlaskForm):
     username = TextField("Username",  [InputRequired(), validate_profile_username])
     email = EmailField("Email", [InputRequired(), Email()])
     avatar = FileField("Avatar", [FileRequired(), FileAllowed(['jpg','png','JPG','PNG','JPEG'], "Images only!")])
     submit = SubmitField("Update")
     
-class BitcoinWalletForm(Form):
-    create = SubmitField("Create a wallet")
 
-class BitcoinWithdrawlForm(Form):
-    amount = FloatField("Bitcoin Amount", [InputRequired(), positve_bitcoin])
-    address = TextField("Bitcoin Address", [InputRequired(), Length(min=8, message="That address doesn't appear to be long enough.")])
-    submit = SubmitField("Widthdrawl")

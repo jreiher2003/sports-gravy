@@ -62,7 +62,6 @@ def nfl_schedule():
 
 @nfl_blueprint.route("/nfl/stats/<int:sid>/")
 def nfl_stats(sid): 
-
     teamseason1 = api_request("/v3/nfl/stats/JSON/TeamSeasonStats/2016REG")
     return render_template(
         "nfl_stats.html", 
