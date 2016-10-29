@@ -7,7 +7,6 @@ class BaseConfig(object):
     # SQLALCHEMY_DATABASE_URI = os.environ['DATABASE_URL']
     SQLALCHEMY_DATABASE_URI = "sqlite:///sports.db"
     CACHE_TYPE = "memcached"
-    BCRYPT_LOG_ROUNDS = 12
     MAIL_SERVER = os.environ["MAIL_SERVER"]
     MAIL_PORT = os.environ["MAIL_PORT"]
     MAIL_USE_SSL = True
@@ -15,14 +14,8 @@ class BaseConfig(object):
     MAIL_USERNAME = os.environ["MAIL_USERNAME"]
     MAIL_PASSWORD = os.environ["MAIL_PASSWORD"]
     MAIL_DEFAULT_SENDER = '"Site Admin" <noreply@sports-gravy.com>'
-
-    SECURITY_UNAUTHORIZED_VIEW = "/nfl/"
-    SECURITY_MSG_UNAUTHORIZED = ("You don't have permission to go there", "danger")
-
     OCP_APIM_SUBSCRIPTION_KEY = os.environ["OCP_APIM_SUBSCRIPTION_KEY"]
-
     UPLOADED_PHOTOS_DEST = '/tmp/photolog/photos'
-    # UPLOADS_DEFAULT_DEST = "app/static/"
     MAX_CONTENT_LENGTH = 16 * 1024 * 1024
 
 class TestConfig(BaseConfig):

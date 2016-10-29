@@ -46,21 +46,6 @@
     history.pushState( null, null, $(this).attr('href') );
     });
     </script>
-    {% if current_user.bitcoin_wallet %}
-    <script>
-    $('#qrcode').qrcode({
-        width: 300,
-        height: 300, 
-        text: "{{ current_user.bitcoin_wallet.address }}",
-    });
-    </script>
-    {% endif %}
-    <!-- create btc wallet js -->
-    <script>
-    $(document).on('click', '#createBCB:enabled', function(){
-        return false
-    });
-    </script>
     <script>
     $(document).ready(function(){
         $("#createBCB").tooltip();

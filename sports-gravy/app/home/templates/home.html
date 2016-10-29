@@ -6,12 +6,7 @@
         <div class="col-md-4 col-md-offset-4">
 
        home<br><br>
-       {% if current_user.has_role("admin") %}
-          {{ current_user.roles }}<br>{{ current_user.has_role("admin") }}
-       {% else %}
-       no player-not logged in<br>
-       {% endif %}
-
+     
        {% for t in team %}
           {{ t }}<br><br><br>
        {% endfor %}

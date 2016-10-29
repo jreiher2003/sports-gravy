@@ -18,17 +18,7 @@
           <li><a href="{{ url_for('nfl.nfl_home') }}">NFL Home</a></li>
           <li><a href="{{ url_for('nfl.nfl_standings') }}">Standings</a></li>
           <li><a href="{{ url_for('nfl.nfl_stats', sid=1) }}">Stats</a></li>
-        {% if current_user.is_active %}
-          <li><a href="{{ url_for('home.profile') }}">{{ current_user.username }}</a></li>
-          <li><a href="{{ url_for('users.logout') }}">logout</a></li>
-        {% else %} 
-          <li><a href="{{ url_for('users.login') }}">login</a></li>
-          <li><a href="{{ url_for('users.register') }}">register</a></li>
-        {% endif %}
       </ul>
-      <!-- <form class="navbar-form navbar-right">
-        <input type="text" class="form-control" placeholder="Search...">
-      </form> -->
       <ul class="nav navbar-nav navbar-left">
         <li><a href="{{ url_for('nfl.nfl_schedule') }}">Odds</a></li>
       </ul>

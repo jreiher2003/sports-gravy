@@ -7,7 +7,7 @@ import hashlib
 from dateutil.parser import parse as parse_date
 from app import app, db, cache
 from sqlalchemy import exc
-from app.users.models import Users, Role, UserRoles, Profile
+# from app.users.models import Users, Role, UserRoles, Profile
 from flask import Blueprint, render_template, url_for, request, redirect,flash, abort
 from flask_security import login_required, roles_required, current_user, roles_accepted
 from slugify import slugify
@@ -22,7 +22,6 @@ def api_request(params):
         headers = {'Ocp-Apim-Subscription-Key': os.environ["OCP_APIM_SUBSCRIPTION_KEY"],}
         url = "https://api.fantasydata.net"
         conn = requests.get("https://api.fantasydata.net/" + params, headers=headers)
-        print conn.status_code
         return conn.json()
     except Exception as e:
         print e

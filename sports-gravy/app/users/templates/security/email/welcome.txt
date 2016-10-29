@@ -1,5 +1,0 @@
-Welcome {{ user.email }}!
-You can confirm your email through the link below:
-
-{#{{ confirmation_link }}
-#}

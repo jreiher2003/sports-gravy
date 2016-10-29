@@ -18,7 +18,6 @@ def api_request(params):
         headers = {'Ocp-Apim-Subscription-Key': os.environ["OCP_APIM_SUBSCRIPTION_KEY"],}
         url = "https://api.fantasydata.net"
         conn = requests.get("https://api.fantasydata.net/" + params, headers=headers)
-        print conn.status_code
         return conn.json()
     except Exception as e:
         print e
@@ -33,4 +32,8 @@ def home():
         all_teams = all_teams,
         team = team,
         )
+
+@home_blueprint.route("/profile")
+def profile():
+    return render_template("profile.html")
 
