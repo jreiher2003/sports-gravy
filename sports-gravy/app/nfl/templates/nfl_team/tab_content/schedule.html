@@ -60,7 +60,7 @@
     </div>
     <div class="row">
         {% for team in ts %}
-        {% if team.Date|dateify > dt_plus_2h %}
+        {#{% if team.Date > dt_plus_2h %}#}
        
         <div class="col-md-12 team_schedule thumbnail">
             <div class="row">
@@ -83,6 +83,6 @@
             </div>
 
         </div>
-        {% endif %}
+        {#{% endif %}#}
         {% endfor %}
     </div>

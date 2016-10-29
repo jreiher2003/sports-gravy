@@ -26,11 +26,22 @@ def api_request(params):
     except Exception as e:
         print e
 
+def find_one(params, key, value):
+    team = api_request(params)
+    return [k for k in team if k[key] == value][0]
+
+def find_one_either_or(params,key1,value1,key2,value2):
+    one = api_request(params)
+    return [k for k in one if k[key1] == value1 or k[key2] == value2]
+
 all_nfl_teams = api_request("v3/nfl/scores/JSON/Teams/2016REG")
 
 @nfl_blueprint.route("/nfl/home/")
 @nfl_blueprint.route("/nfl/")
 def nfl_home():
+    jj = find_one("/v3/nfl/scores/JSON/Teams", "Key", "ARI")
+    print jj["StadiumDetails"]["StadiumID"]
+    print find_one("/v3/nfl/scores/JSON/Stadiums", "StadiumID", 29) 
     return render_template(
         "nfl_home.html", 
         all_teams = all_nfl_teams,
@@ -72,27 +83,29 @@ def nfl_stats(sid):
 def nfl_team_home(sid,key,team):
     dt = today_and_now()
     dt_plus_2h = dt - datetime.timedelta(hours=4)
-    jj = NFLTeam.query.filter_by(Key=key).one()
-    tt = NFLStadium.query.filter_by(StadiumID=jj.StadiumID).one() 
-    ss = NFLStandings.query.filter_by(Team=key).one()
-    tss = NFLTeamSeason.query.filter_by(Team=key, SeasonType=sid).one()
-    ts = NFLSchedule.query.filter_by(SeasonType=sid).filter((NFLSchedule.AwayTeam==key) | (NFLSchedule.HomeTeam==key))
-    team_score = NFLScore.query.filter_by(SeasonType=sid).filter((NFLScore.AwayTeam==key) | (NFLScore.HomeTeam==key))
-    team_rush_rank = team_rush_avg(tss.RushingYards,tss.Team, sid) 
-    team_pass_rank = team_pass_avg(tss.PassingYards,tss.Team, sid) 
-    opp_team_rush_rank = opp_team_rush_avg(tss.OpponentRushingYards,tss.Team, sid) 
-    opp_team_pass_rank = opp_team_pass_avg(tss.OpponentPassingYards,tss.Team, sid) 
-    team_off_rank = team_off_avg(tss.OffensiveYards,tss.Team, sid)
-    team_def_rank = team_def_avg(tss.OpponentOffensiveYards,tss.Team, sid) 
+    jj = find_one("/v3/nfl/scores/JSON/Teams", "Key", key)
+    tt = find_one("/v3/nfl/scores/JSON/Stadiums", "StadiumID", jj["StadiumDetails"]["StadiumID"]) 
+    ss = find_one("/v3/nfl/scores/JSON/Standings/2016REG", "Team", key)
+    tss = find_one("/v3/nfl/scores/JSON/TeamSeasonStats/2016REG", "Team", key)
+    ts = find_one_either_or("/v3/nfl/scores/JSON/Schedules/2016REG", "HomeTeam", key, "AwayTeam", key)
+    
+    team_score = find_one_either_or("/v3/nfl/scores/JSON/Scores/2016REG", "HomeTeam", key, "AwayTeam", key)
+    print team_score
+    # team_rush_rank = team_rush_avg(tss["RushingYards"],tss["Team"], sid) 
+    # team_pass_rank = team_pass_avg(tss.PassingYards,tss.Team, sid) 
+    # opp_team_rush_rank = opp_team_rush_avg(tss.OpponentRushingYards,tss.Team, sid) 
+    # opp_team_pass_rank = opp_team_pass_avg(tss.OpponentPassingYards,tss.Team, sid) 
+    # team_off_rank = team_off_avg(tss.OffensiveYards,tss.Team, sid)
+    # team_def_rank = team_def_avg(tss.OpponentOffensiveYards,tss.Team, sid) 
     return render_template(
         "nfl_team/nfl_team_home.html",
         all_teams = all_nfl_teams,
-        team_rush_rank = team_rush_rank,
-        team_pass_rank = team_pass_rank,
-        opp_team_rush_rank = opp_team_rush_rank,
-        opp_team_pass_rank = opp_team_pass_rank,
-        team_off_rank = team_off_rank,
-        team_def_rank = team_def_rank,
+        # team_rush_rank = team_rush_rank,
+        # team_pass_rank = team_pass_rank,
+        # opp_team_rush_rank = opp_team_rush_rank,
+        # opp_team_pass_rank = opp_team_pass_rank,
+        # team_off_rank = team_off_rank,
+        # team_def_rank = team_def_rank,
         team_score = team_score,
         dt_plus_2h = dt_plus_2h,
         dt = dt,
