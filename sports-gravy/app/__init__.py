@@ -20,7 +20,7 @@ bcrypt = Bcrypt(app)
 cache = Cache(app)
 manager = Manager(app) 
 
-from temp_filters import dateify, datetimefilter, urlify, datetimefilter_f, game_time, game_date, game_day
+from temp_filters import dateify, datetimefilter, urlify, datetimefilter_f, game_time, game_date, game_day, roundify
 app.jinja_env.filters["dateify"] = dateify
 app.jinja_env.filters["datetimefilter"] = datetimefilter
 app.jinja_env.filters["urlify"] = urlify
@@ -28,6 +28,7 @@ app.jinja_env.filters["datetimefilter_f"] = datetimefilter_f
 app.jinja_env.filters["game_time"] = game_time
 app.jinja_env.filters["game_date"] = game_date
 app.jinja_env.filters["game_day"] = game_day
+app.jinja_env.filters["roundify"] = roundify
 
 
 # from app.admin.models import AdminPage, UserAdmin 

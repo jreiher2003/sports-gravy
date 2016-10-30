@@ -2,9 +2,6 @@
 {% block title %}NFL Teams{% endblock %}
 {% block style %}
 
-td,th {
-    text-align: center;
-}
 {% endblock %}
 {% block content %}
 {% include "nfl_team/nfl_team_jumbotron.html" %}
@@ -14,19 +11,13 @@ td,th {
             <form action="" method="get" enctype="multipart/form-data">
                 <select id="goto_season">
                     <option value="">Select Season</option>
-                    <option value="{{ url_for('nfl.nfl_team_home', sid=1, key=jj.Key, team=jj.FullName|urlify) }}">Regular Season</option>
-                    <option value="{{ url_for('nfl.nfl_team_home', sid=2, key=jj.Key, team=jj.FullName|urlify) }}">Pre-Season</option>
+                    <option value="{{ url_for('nfl.nfl_team_home', sid='2016REG', key=jj.Key, team=jj.FullName|urlify) }}">Regular Season</option>
+                    <option value="{{ url_for('nfl.nfl_team_home', sid='2016PRE', key=jj.Key, team=jj.FullName|urlify) }}">Pre-Season</option>
                 </select>
             </form>
             {% include "nfl_team/nfl_team_tab_content.html" %}
         </div>
     </div>
 </div>
- <script>
-// $("ul.nav-tabs a").click(function (e) {
-//    e.preventDefault();  
-//      $(this).tab('show');
-// });
-// </script>
 
 {% endblock %}

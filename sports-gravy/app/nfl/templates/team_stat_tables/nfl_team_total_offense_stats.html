@@ -5,15 +5,15 @@
         <tr>
         <tr>
             <th>RK</th>
-            <th><a>TEAM<i class="fa fa-fw fa-sort"></i></a></th>
-            <th><a>YDS<i class="fa fa-fw fa-sort"></i></a></th>
-            <th><a>YDS/G<i class="fa fa-fw fa-sort"></i></a></th>
-            <th><a>PASS<i class="fa fa-fw fa-sort"></i></a></th>
-            <th><a>P YDS/G<i class="fa fa-fw fa-sort"></i></a></th>
-            <th><a>RUSH<i class="fa fa-fw fa-sort"></i></a></th>
-            <th><a>R YDS/G<i class="fa fa-fw fa-sort"></i></a></th>
-            <th><a>PTS<i class="fa fa-fw fa-sort"></i></a></th>
-            <th><a>PTS/G<i class="fa fa-fw fa-sort"></i></a></th>
+            <th><a data-toggle="tooltip" title="Team Abbr">TEAM<i class="fa fa-fw fa-sort"></i></a></th>
+            <th><a data-toggle="tooltip" title="Total Yards">YDS<i class="fa fa-fw fa-sort"></i></a></th>
+            <th><a data-toggle="tooltip" title="Total Yards Per Game">YDS/G<i class="fa fa-fw fa-sort"></i></a></th>
+            <th><a data-toggle="tooltip" title="Total Passing Yards">PASS<i class="fa fa-fw fa-sort"></i></a></th>
+            <th><a data-toggle="tooltip" title="Passing Yards Per Game">P YDS/G<i class="fa fa-fw fa-sort"></i></a></th>
+            <th><a data-toggle="tooltip" title="Total Rushing Yards">RUSH<i class="fa fa-fw fa-sort"></i></a></th>
+            <th><a data-toggle="tooltip" title="Rushing Yards Per Game">R YDS/G<i class="fa fa-fw fa-sort"></i></a></th>
+            <th><a data-toggle="tooltip" title="Total Points">PTS<i class="fa fa-fw fa-sort"></i></a></th>
+            <th><a data-toggle="tooltip" title="Points Per Game">PTS/G<i class="fa fa-fw fa-sort"></i></a></th>
         </tr>
     </thead>
     <tbody>
@@ -24,13 +24,13 @@
             <td></td>
             <td>{{ t.Team }}</td>
             <td>{{ t.OffensiveYards }}</td>
-            <td>{{ t.offensive_yards_per_game }}</td>
+            <td>{{ (t.OffensiveYards / t.Games) | roundify }}</td>
             <td>{{ t.PassingYards }}</td>
-            <td>{{ t.passing_per_game }}</td>
+            <td>{{ (t.PassingYards / t.Games) | roundify }}</td>
             <td>{{ t.RushingYards }}</td>
-            <td>{{ t.rushing_yards_per_game }}</td>
+            <td>{{ (t.RushingYards / t.Games) | roundify }}</td>
             <td>{{ t.Score }}</td>
-            <td>{{ t.score_per_game }}</td>
+            <td>{{ (t.Score / t.Games) | roundify }}</td>
         </tr>
         {% endfor %}
     </tbody>

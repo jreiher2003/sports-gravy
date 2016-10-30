@@ -1,11 +1,6 @@
 {% extends "base.html" %}
 {% block title %}{% endblock %}
 {% block style %}
-th.headerSortDown { 
-    background-image: url(../img/small_desc.gif); 
-    background-color: #3399FF; 
-}
-
 {% endblock %}
 {% block content %}
 <div class="container">
@@ -14,16 +9,15 @@ th.headerSortDown {
             <form action="" method="get" enctype="multipart/form-data">
                 <select id="goto_stats">
                     <option>Season</option>
-                    <option value="{{ url_for('nfl.nfl_stats', sid=1) }}">Regular Season</option>
-                    <option value="{{ url_for('nfl.nfl_stats', sid=2) }}">Pre-Season</option>
+                    <option value="{{ url_for('nfl.nfl_stats', sid='2016REG') }}">Regular Season</option>
+                    <option value="{{ url_for('nfl.nfl_stats', sid='2016PRE') }}">Pre-Season</option>
                 </select>
             </form>
             <ul class="nav nav-tabs">
                 <li class="active"><a href="#offense" data-toggle="tab">Offense</a></li>
                 <li><a href="#defense" data-toggle="tab">Defense</a></li>
                 <li><a href="#special_teams" data-toggle="tab">Special Teams</a></li>
-            </ul>
-                
+            </ul> 
             <!-- <!-- Tab panes -->
             <div class="tab-content">
                 <div class="tab-pane fade active in" id="offense">
@@ -59,9 +53,7 @@ th.headerSortDown {
                         <li><a href="#rushing_defense" data-toggle="tab">Rushing Defense</a></li>
                         <li><a href="#receiving_defense" data-toggle="tab">Receiving Defense</a></li>
                         <li><a href="#downs_defense" data-toggle="tab">Opponent Downs</a></li>
-                        
-                        <li><a href="#sacks" data-toggle="tab">Tackles/Sacks/Interceptions/Fumbles</a></li>
-                        
+                        <li><a href="#sacks" data-toggle="tab">Tackles/Sacks/Interceptions/Fumbles</a></li> 
                     <ul>
                     <div class="tab-content">
                         <div class="tab-pane fade active in" id="total_defense">
@@ -82,7 +74,6 @@ th.headerSortDown {
                         <div class="tab-pane fade" id="sacks">
                             {% include "team_stat_tables/nfl_team_total_defensive_tsif_stats.html" %}
                         </div>
-    
                     </div>
                 </div>
                 <div class="tab-pane fade" id="special_teams">
@@ -102,11 +93,8 @@ th.headerSortDown {
                             {% include "team_stat_tables/nfl_team_total_special_returns.html" %}
                         </div>
                     </div>
-
                 </div>
         </div>
     </div>
 </div>
-
-
 {% endblock %}

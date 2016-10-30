@@ -34,6 +34,10 @@ def game_date(value):
 def urlify(value):
   return slugify(value)
 
+@app.template_filter()
+def roundify(value):
+    return round(value, 1)
+
 # @app.template_filter()
 # def format_date_reg(value):
 #     return "{dt:%Y-%m-%d}".format(dt=value)
