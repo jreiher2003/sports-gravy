@@ -39,9 +39,9 @@ all_nfl_teams = api_request("v3/nfl/scores/JSON/Teams/2016REG")
 @nfl_blueprint.route("/nfl/home/")
 @nfl_blueprint.route("/nfl/")
 def nfl_home():
-    jj = find_one("/v3/nfl/scores/JSON/Teams", "Key", "ARI")
-    print jj["StadiumDetails"]["StadiumID"]
-    print find_one("/v3/nfl/scores/JSON/Stadiums", "StadiumID", 29) 
+    # jj = find_one("/v3/nfl/scores/JSON/Teams", "Key", "ARI")
+    # print jj["StadiumDetails"]["StadiumID"]
+    # print find_one("/v3/nfl/scores/JSON/Stadiums", "StadiumID", 29) 
     return render_template(
         "nfl_home.html", 
         all_teams = all_nfl_teams,
@@ -61,8 +61,6 @@ def nfl_standings():
 def nfl_schedule():
     dt = datetime.datetime.now()
     sch = api_request("/v3/nfl/scores/JSON/Schedules/2016REG")
-    for i in sch:
-        print i
     return render_template(
         "nfl_schedule.html", 
         all_teams = all_nfl_teams, 
@@ -90,7 +88,7 @@ def nfl_team_home(sid,key,team):
     ts = find_one_either_or("/v3/nfl/scores/JSON/Schedules/2016REG", "HomeTeam", key, "AwayTeam", key)
     
     team_score = find_one_either_or("/v3/nfl/scores/JSON/Scores/2016REG", "HomeTeam", key, "AwayTeam", key)
-    print team_score
+    # print team_score
     # team_rush_rank = team_rush_avg(tss["RushingYards"],tss["Team"], sid) 
     # team_pass_rank = team_pass_avg(tss.PassingYards,tss.Team, sid) 
     # opp_team_rush_rank = opp_team_rush_avg(tss.OpponentRushingYards,tss.Team, sid) 
